@@ -6,8 +6,8 @@ import Sidebar from './components/sidebar';
 const App = () => (
     <div>
         <Sidebar />
-        <div>Hello world!</div>
-        <CardOne />
+{/*         <div>Hello world!</div>
+        <CardOne /> */}
     </div>
 );
 
