@@ -1,6 +1,7 @@
 const { resolve } = require("path");
 const HtmlWP = require('html-webpack-plugin')
 const MiniCssEP = require('mini-css-extract-plugin')
+const isDev = process.env.NODE_ENV !== 'production'
 
 module.exports = {
     entry: [
@@ -35,9 +36,10 @@ module.exports = {
             }]
         },{
             test: /\.module\.s?css$/,
-            use: [{
-                loader: MiniCssEP.loader
-            },{
+            use: [ isDev 
+                ?   {loader:"style-loader"}
+                :   {loader: MiniCssEP.loader}
+                ,{
                 loader: 'css-loader',
                 options: {
                     modules: true,
