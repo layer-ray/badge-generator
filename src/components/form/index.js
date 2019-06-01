@@ -4,6 +4,7 @@ import useForm from '../../hooks/CustomHooks';
 
 import formStyle from './form.module.scss';
 
+import image from '../../../public/imgs/placeholder.jpg';
 const Form = () => {
 
     const confirm = () => {
@@ -74,9 +75,15 @@ const Form = () => {
                     value={inputs.github}
                 />
             </div>
-            <div className={[formStyle.field, formStyle.buttons].join(" ")}>
-                <button>cancel</button>
-                <input type="submit" value="create"/>            
+            <div className={formStyle.field}>
+                <div className={formStyle.buttons}>
+                    <input className={[formStyle.btn, formStyle.success].join(" ")} type="submit" value="create"/>
+                    <button className={[formStyle.btn, formStyle.error].join(" ")}>cancel</button>
+                </div>
+                <div className={formStyle.image}>
+                    <label htmlFor="email">QR Code</label>
+                    <img src={image} alt="placeholder" width="100px" height="100px" />
+                </div>
             </div>
         </form>
     );
