@@ -1,0 +1,49 @@
+input[type=text]{
+    border: 0;
+    border-bottom: 2px groove #1d1a1a;
+}
+
+.form {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: stretch;
+}
+
+.field {
+    padding: 1rem;
+    flex-grow: 1;
+    border: 1px solid #aaa;
+    position: relative;
+}
+
+.field > input[type=text] {
+    min-width: 100px;
+    width: 100%;
+    font-size: 1.2rem;
+}
+
+.field.buttons {
+    width: 100%;
+    text-align: center;
+}
+
+.field.buttons > * {
+    width: 40%;
+    margin: 0 2%;
+    border: 0;
+}
+
+label {
+    display: block;
+    position: relative;
+    font-size: small;
+    top: -1rem;
+    left: -1rem;
+}
+
+.combinedField >*:first-child {
+    width: 15%;
+}
+.combinedField >*:nth-child(2) {
+    width: 80%;
+}
