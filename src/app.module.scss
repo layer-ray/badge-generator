@@ -1,0 +1,26 @@
+.container {
+    display: grid;
+    height: 100vh;
+    grid-template-rows: repeat(9,  1fr);
+    max-width: 768px;
+    margin: auto;
+}
+
+.cardFront {
+    grid-row: 2/3;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+}
+
+.cardRear {
+    grid-row: 5/6;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+}
+
+.panel {
+    grid-row: 6/10;
+    align-self: flex-end;
+}

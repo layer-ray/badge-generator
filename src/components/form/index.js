@@ -1,19 +1,14 @@
-import * as React from 'react';
-
-import useForm from '../../hooks/CustomHooks';
+import React, {useContext, useState} from 'react';
 
 import formStyle from './form.module.scss';
-
 import image from '../../../public/imgs/placeholder.jpg';
-const Form = () => {
 
-    const confirm = () => {
-        console.log('good to go!\n', inputs);
-    }
-    const {inputs, handleChange, handleSubmit} = useForm(confirm);
+import {FirstContext} from '../../App';
 
+const Form = props => {
+    let {first, setFirst} = useContext(FirstContext);
     return(
-        <form onSubmit={handleSubmit} className={formStyle.form}>
+        <form className={formStyle.form}>
             <div className={formStyle.field}>
                 <label htmlFor="first-name">First name</label>
                 <input 
@@ -21,8 +16,8 @@ const Form = () => {
                     name="firstName" 
                     id="first-name"
                     size="1"
-                    onChange={handleChange}
-                    value={inputs.firstName}
+                    onChange={e => setFirst(e.target.value)}
+                    value={first}
                     required
                 />
             </div>
@@ -33,8 +28,6 @@ const Form = () => {
                     name="lastName"
                     id="last-name"
                     size="1"
-                    onChange={handleChange}
-                    value={inputs.lastName}
                     required
                 />
             </div>
@@ -45,8 +38,6 @@ const Form = () => {
                     name="email"
                     id="email"
                     size="1"
-                    onChange={handleChange}
-                    value={inputs.email}
                     required
                 />
             </div>
@@ -59,8 +50,6 @@ const Form = () => {
                         name="twitter" 
                         id="twitter"
                         size="1"
-                        onChange={handleChange}
-                        value={inputs.twitter}
                     />
                 </div>
             </div>
@@ -71,8 +60,6 @@ const Form = () => {
                     name="github" 
                     id="github"
                     size="1"
-                    onChange={handleChange}
-                    value={inputs.github}
                 />
             </div>
             <div className={formStyle.field}>

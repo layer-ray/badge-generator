@@ -2,6 +2,8 @@
     display: flex;
     flex-flow: row wrap;
     justify-content: stretch;
+    background-color: #eee;
+    padding: 1rem;
 }
 
 .field {
@@ -30,7 +32,7 @@
 
 .btn {
     width: 100%;
-    background-color: none;
+    background: none;
     border: 0;
 }
 
@@ -65,8 +67,10 @@ label {
     left: -1rem;
     padding: 1px;
 }
+
 input[type=text]{
     border: 0;
+    background-color: #eee;
     border-bottom: 2px groove #1d1a1a;
     min-width: 100px;
     width: 100%;
@@ -75,12 +79,4 @@ input[type=text]{
 
 .combinedField input[type=text] {
     width: 80%;
-}
-
-@media(min-width: 640px) {
-    .form {
-        display: flex;
-        flex-flow: column  nowrap;
-        justify-content: stretch;
-    }
 }

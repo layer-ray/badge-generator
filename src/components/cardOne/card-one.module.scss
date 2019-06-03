@@ -1,5 +1,12 @@
-@import '../../shared';
-
 .test {
-    background-color: $grey-color;
+    background-color:#eee;
+    padding: 1rem;
+    border: 3px solid #999;
+    margin: auto;
 }
+
+.field {
+    border-bottom: 1px solid black;
+    margin: 1rem;
+    text-align: center;
+} 
