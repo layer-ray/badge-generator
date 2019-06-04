@@ -1,26 +1,33 @@
 .container {
-    display: grid;
-    height: 100vh;
-    grid-template-rows: repeat(9,  1fr);
-    max-width: 768px;
+    height: 98vh;
+}
+
+.centered {
     margin: auto;
+    right: 0;
+    left: 0;
+    width:100%;
+    max-width: 768px;
 }
 
-.cardFront {
-    grid-row: 2/3;
-    align-self: center;
-    justify-self: center;
-    width: 100%;
-}
-
-.cardRear {
-    grid-row: 5/6;
-    align-self: center;
-    justify-self: center;
-    width: 100%;
+.card {
+    position: absolute;
+    top: 10vh;
 }
 
 .panel {
-    grid-row: 6/10;
-    align-self: flex-end;
+    position: fixed;
+    bottom: 0;
+}
+
+.button {
+    position: absolute;
+    top: 5px;
+    right: 15px;
+}
+
+@media(max-width: 768px){
+    .card {
+        top: 5vh;
+    }
 }
