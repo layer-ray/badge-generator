@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import cardStyle from './card-one.module.scss';
-import image from './imgs/placeholder.jpg';
+import image from './imgs/qr_wiki_en.png';
 
 const CardRear = () => {
     return (
