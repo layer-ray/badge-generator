@@ -1,12 +1,13 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 
 import formStyle from './form.module.scss';
-import image from '../../../public/imgs/placeholder.jpg';
+import image from '../../../public/imgs/qr_wiki_en.png';
 
-import {FirstContext} from '../../App';
-
+    
 const Form = props => {
-    let {first, setFirst} = useContext(FirstContext);
+    const {state, dispatch} = props;
+    const {firstName, lastName, email, github, twitter} = state;
+
     return(
         <form className={formStyle.form}>
             <div className={formStyle.field}>
@@ -16,8 +17,8 @@ const Form = props => {
                     name="firstName" 
                     id="first-name"
                     size="1"
-                    onChange={e => setFirst(e.target.value)}
-                    value={first}
+                    onChange={e => dispatch({type: 'first',payload: e.target.value})}
+                    value={firstName}
                     required
                 />
             </div>
@@ -28,6 +29,8 @@ const Form = props => {
                     name="lastName"
                     id="last-name"
                     size="1"
+                    onChange={e => dispatch({type: 'last',payload: e.target.value})}
+                    value={lastName}
                     required
                 />
             </div>
@@ -38,7 +41,20 @@ const Form = props => {
                     name="email"
                     id="email"
                     size="1"
+                    onChange={e => dispatch({type: 'email',payload: e.target.value})}
+                    value={email}
                     required
+                />
+            </div>
+            <div className={formStyle.field}>
+                <label htmlFor="github">Github account</label>
+                <input 
+                    type="text" 
+                    name="github" 
+                    id="github"
+                    size="1"
+                    onChange={e => dispatch({type: 'github',payload: e.target.value})}
+                    value={github}
                 />
             </div>
             <div className={formStyle.field}>
@@ -50,17 +66,10 @@ const Form = props => {
                         name="twitter" 
                         id="twitter"
                         size="1"
+                        onChange={e => dispatch({type: 'twitter',payload: e.target.value})}
+                        value={twitter}
                     />
                 </div>
-            </div>
-            <div className={formStyle.field}>
-                <label htmlFor="github">Github account</label>
-                <input 
-                    type="text" 
-                    name="github" 
-                    id="github"
-                    size="1"
-                />
             </div>
             <div className={formStyle.field}>
                 <div className={formStyle.buttons}>
