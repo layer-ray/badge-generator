@@ -43,5 +43,3 @@ CardFront.propTypes = {
 };
 
 export default CardFront;
-
-// https://www.w3schools.com/howto/img_forest.jpg

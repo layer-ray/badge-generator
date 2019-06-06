@@ -62,8 +62,16 @@ const App = () => {
     };
 
     const loadImage = () => {
-        const imgSrc = prompt('insert url');
-        setImageSrc(imgSrc);
+        let imgSrc = prompt('insert url');
+        const tmpImg = document.createElement('img');
+        tmpImg.setAttribute('src', imgSrc);
+        tmpImg.onerror = function(err){
+            imgSrc= null;
+            console.error('err',err);
+        };
+        tmpImg.onload = function(){
+            setImageSrc(imgSrc);
+        };
     }
 
     const generateQR = e => {
