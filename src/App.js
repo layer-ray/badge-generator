@@ -50,31 +50,69 @@ const App = () => {
     };
 
     const spin = () => flip(!side);
+
+    const printDoc = () => {
+        window.print();
+    };
+
+    const transitions = useTransition(side, null, {
+        initial: { position: 'absolute', opacity: 0, transform: 'rotateY(0deg)' },
+        from: { position: 'absolute', opacity: 0, transform: 'rotateY(-180deg)' },
+        enter: { opacity: 1, transform: 'rotateY(0deg)' },
+        leave: { opacity: 0, transform: 'rotateY(-180deg)' },
+        unique: true,
+        reset: true,
+        config: config.molasses
+    });
+
     const loadImage = () => {
         const imgSrc = prompt('insert url');
         setImageSrc(imgSrc);
     }
     return (
-        <div className={style.container}>        
-        {
+        <>
+            <div className={style.container}>
+                {
+                    transitions.map(({ item, key, props }) =>  (
+                            item
+                            ? <animated.section 
+                                key={key} 
+                                style={props}
+                                className={[style.card, style.centered].join(" ")}
+                                >
+                                    <CardFront 
+                                        state={state} 
                                         spin={spin}
                                         image={imageSrc || image}
                                         load={loadImage}
-                    >
+                                    />
+                                </animated.section>
+                            : <animated.section 
+                                key={key} 
+                                    style={props}
+                                    className={[style.card, style.centered].join(" ")}
+                                >
                                     <CardRear state={state} spin={spin} />
-                    <button 
-                        onClick={() => Flip(side ? 0 : 1)}
-                        className={style.button}
-                    >
-                        See {side ? 'rear' : 'front'}
-                    </button>
-                    <CardRear />
-                </div>
-        }
-        <div className={[style.panel, style.centered].join(" ")}>
-            <Form state={state} dispatch={dispatch}/>
+                                </animated.section>
+                            )
+                        )
+                }
+            <button 
+                onClick={printDoc} 
+                className={[style.btn, style.centered].join(" ")}
+            >
+                Print Your Badge!
+            </button>
+            <div className={[style.panel, style.centered].join(" ")}>
+                <Form state={state} dispatch={dispatch} focusHandler={displayActiveSide}/>
+            </div>
         </div>
-    </div>
+        <div className={style.toPrint}>
+            <CardFront  state={state} spin={spin} image={imageSrc || image} />
+            <br />
+            <CardRear  state={state} spin={spin} />
+        </div>
+    </>
     );
 };
 

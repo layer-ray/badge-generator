@@ -13,6 +13,7 @@
 .card {
     position: absolute;
     top: 10vh;
+    width: 360px;
 }
 
 .panel {
@@ -20,14 +21,35 @@
     bottom: 0;
 }
 
-.button {
+.btn {
     position: absolute;
-    top: 5px;
-    right: 15px;
+    top: 40vh;
+    width: 50%;
+    padding: 1rem;
+    background-color: #180;
+    border-radius: 20px;
+    color: #eee;
+    font-size: bold;
+}
+
+.toPrint {
+    display: none;
 }
 
 @media(max-width: 768px){
     .card {
         top: 5vh;
+    }
+    .btn {
+        top: 35vh;
+    }
+}
+
+@media print {
+    .toPrint {
+        display: block;
+    }
+    .container {
+        display: none;
     }
 }
