@@ -17,6 +17,7 @@ const Form = props => {
                     name="firstName" 
                     id="first-name"
                     size="1"
+                    maxLength="17"
                     onChange={e => dispatch({type: 'first',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={firstName}
@@ -30,6 +31,7 @@ const Form = props => {
                     name="lastName"
                     id="last-name"
                     size="1"
+                    maxLength="17"
                     onChange={e => dispatch({type: 'last',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={lastName}
@@ -43,6 +45,7 @@ const Form = props => {
                     name="email"
                     id="email"
                     size="1"
+                    maxLength="40"
                     onChange={e => dispatch({type: 'email',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={email}
@@ -56,6 +59,7 @@ const Form = props => {
                     name="github" 
                     id="github"
                     size="1"
+                    maxLength="17"
                     onChange={e => dispatch({type: 'github',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={github}
@@ -70,6 +74,7 @@ const Form = props => {
                         name="twitter" 
                         id="twitter"
                         size="1"
+                        maxLength="17"
                         onChange={e => dispatch({type: 'twitter',payload: e.target.value})}
                         onFocus={focusHandler}
                         value={twitter.slice(1)}
