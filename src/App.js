@@ -136,9 +136,19 @@ const App = () => {
             </div>
         </div>
         <div className={style.toPrint}>
-            <CardFront  state={state} spin={spin} image={imageSrc || image} />
+            <CardFront  
+                state={state} 
+                spin={spin} 
+                image={imageSrc || image} 
+                className={[style.card, style.centered].join(" ")}
+            />
             <br />
-            <CardRear  state={state} spin={spin} QR={QRSrc || placeholderQR}/>
+            <CardRear  
+                state={state} 
+                spin={spin} 
+                QR={QRSrc || placeholderQR}
+                className={[style.card, style.centered].join(" ")}
+            />
         </div>
     </>
     );
