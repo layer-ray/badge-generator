@@ -1,5 +1,6 @@
 import React, {useState, useReducer} from 'react';
 
+import QRCode from 'qrcode';
 import {useTransition, animated, config} from 'react-spring';
 
 import CardFront from './components/cardOne/CardFront';
@@ -60,9 +61,21 @@ const App = () => {
         window.print();
     };
 
+    const loadImage = () => {
+        const imgSrc = prompt('insert url');
+        setImageSrc(imgSrc);
+    }
+
     const generateQR = e => {
         e.preventDefault();
-
+        const data = JSON.stringify(state);
+        QRCode.toDataURL(data)
+                .then(QR => {
+                    setQRSrc(QR);
+                })
+                .catch( error => {
+                    console.error(error);
+                });
     }
 
     const transitions = useTransition(side, null, {
@@ -75,10 +88,6 @@ const App = () => {
         config: config.molasses
     });
 
-    const loadImage = () => {
-        const imgSrc = prompt('insert url');
-        setImageSrc(imgSrc);
-    }
     return (
         <>
             <div className={style.container}>
