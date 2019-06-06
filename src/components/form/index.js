@@ -5,7 +5,7 @@ import image from '../../../public/imgs/qr_wiki_en.png';
 
     
 const Form = props => {
-    const {state, dispatch} = props;
+    const {state, dispatch, focusHandler} = props;
     const {firstName, lastName, email, github, twitter} = state;
 
     return(
@@ -18,6 +18,7 @@ const Form = props => {
                     id="first-name"
                     size="1"
                     onChange={e => dispatch({type: 'first',payload: e.target.value})}
+                    onFocus={focusHandler}
                     value={firstName}
                     required
                 />
@@ -30,6 +31,7 @@ const Form = props => {
                     id="last-name"
                     size="1"
                     onChange={e => dispatch({type: 'last',payload: e.target.value})}
+                    onFocus={focusHandler}
                     value={lastName}
                     required
                 />
@@ -42,6 +44,7 @@ const Form = props => {
                     id="email"
                     size="1"
                     onChange={e => dispatch({type: 'email',payload: e.target.value})}
+                    onFocus={focusHandler}
                     value={email}
                     required
                 />
@@ -54,6 +57,7 @@ const Form = props => {
                     id="github"
                     size="1"
                     onChange={e => dispatch({type: 'github',payload: e.target.value})}
+                    onFocus={focusHandler}
                     value={github}
                 />
             </div>
@@ -67,6 +71,7 @@ const Form = props => {
                         id="twitter"
                         size="1"
                         onChange={e => dispatch({type: 'twitter',payload: e.target.value})}
+                        onFocus={focusHandler}
                         value={twitter.slice(1)}
                     />
                 </div>

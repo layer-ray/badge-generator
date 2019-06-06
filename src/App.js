@@ -8,6 +8,8 @@ import Form from './components/form';
 
 import style from './app.module.scss';
 
+import image from '../public/imgs/placeholder.jpg';
+
 const App = () => {
     const initialState = {
         firstName: '',
@@ -36,9 +38,18 @@ const App = () => {
         }
     };
 
+    const [side, flip] = useState(true);
     const [imageSrc, setImageSrc] = useState(image);
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const displayActiveSide = e => {
+        if (['firstName', 'lastName'].includes(e.target.name) && !side
+            ||
+            ['email', 'github', 'twitter'].includes(e.target.name) && side)
+            flip(!side);
+    };
+
+    const spin = () => flip(!side);
     const loadImage = () => {
         const imgSrc = prompt('insert url');
         setImageSrc(imgSrc);
@@ -46,14 +57,11 @@ const App = () => {
     return (
         <div className={style.container}>        
         {
+                                        spin={spin}
                                         image={imageSrc || image}
                                         load={loadImage}
                     >
-                        See {side ? 'rear' : 'front'}
-                    </button>
-                    <CardFront state={state}/>
-                </div>
-                : <div className={[style.card, style.centered].join(" ")}>
+                                    <CardRear state={state} spin={spin} />
                     <button 
                         onClick={() => Flip(side ? 0 : 1)}
                         className={style.button}
