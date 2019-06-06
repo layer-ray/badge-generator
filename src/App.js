@@ -8,7 +8,7 @@ import Form from './components/form';
 
 import style from './app.module.scss';
 
-import image from '../public/imgs/placeholder.jpg';
+import placeholderImage from '../public/imgs/placeholder.jpg';
 
 const App = () => {
     const initialState = {
@@ -34,6 +34,7 @@ const App = () => {
                     ?  {...state, twitter: ''}
                     :  {...state, twitter: '@' + action.payload};
             case 'reset':
+                setImageSrc(placeholderImage);
                 return initialState;
             default:
                 throw Error('Unknown event occurred')
@@ -41,7 +42,7 @@ const App = () => {
     };
 
     const [side, flip] = useState(true);
-    const [imageSrc, setImageSrc] = useState(image);
+    const [imageSrc, setImageSrc] = useState(placeholderImage);
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const displayActiveSide = e => {
@@ -59,7 +60,7 @@ const App = () => {
 
     const generateQR = e => {
         e.preventDefault();
-        
+
     }
 
     const transitions = useTransition(side, null, {
