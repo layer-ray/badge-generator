@@ -3,11 +3,14 @@ import React, {useState} from 'react';
 import formStyle from './form.module.scss';
 import image from '../../../public/imgs/qr_wiki_en.png';
 
-    
 const Form = props => {
-    const {state, dispatch, focusHandler} = props;
+    const {state, dispatch, focusHandler, generateQR} = props;
     const {firstName, lastName, email, github, twitter} = state;
-
+    const resetAll = e => {
+        e.preventDefault();
+        dispatch({type:'reset'})
+    };
+    
     return(
         <form className={formStyle.form}>
             <div className={formStyle.field}>
@@ -83,8 +86,18 @@ const Form = props => {
             </div>
             <div className={formStyle.field}>
                 <div className={formStyle.buttons}>
-                    <input className={[formStyle.btn, formStyle.success].join(" ")} type="submit" value="create"/>
-                    <button className={[formStyle.btn, formStyle.error].join(" ")}>cancel</button>
+                    <input 
+                        className={[formStyle.btn, formStyle.success].join(" ")} 
+                        type="submit" 
+                        value="create"
+                        onClick={generateQR}
+                    />
+                    <button 
+                        className={[formStyle.btn, formStyle.error].join(" ")}
+                        onClick={resetAll}
+                    >
+                        cancel
+                    </button>
                 </div>
                 <div className={formStyle.image}>
                     <label htmlFor="email">QR Code</label>

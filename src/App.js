@@ -33,6 +33,8 @@ const App = () => {
                 return action.payload === ''
                     ?  {...state, twitter: ''}
                     :  {...state, twitter: '@' + action.payload};
+            case 'reset':
+                return initialState;
             default:
                 throw Error('Unknown event occurred')
         }
@@ -54,6 +56,11 @@ const App = () => {
     const printDoc = () => {
         window.print();
     };
+
+    const generateQR = e => {
+        e.preventDefault();
+        
+    }
 
     const transitions = useTransition(side, null, {
         initial: { position: 'absolute', opacity: 0, transform: 'rotateY(0deg)' },
@@ -104,7 +111,12 @@ const App = () => {
                 Print Your Badge!
             </button>
             <div className={[style.panel, style.centered].join(" ")}>
-                <Form state={state} dispatch={dispatch} focusHandler={displayActiveSide}/>
+                <Form 
+                    state={state} 
+                    dispatch={dispatch} 
+                    focusHandler={displayActiveSide}
+                    generateQR={generateQR}
+                />
             </div>
         </div>
         <div className={style.toPrint}>
