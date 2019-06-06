@@ -9,6 +9,7 @@ import Form from './components/form';
 import style from './app.module.scss';
 
 import placeholderImage from '../public/imgs/placeholder.jpg';
+import placeholderQR from '../public/imgs/qr_wiki_en.png';
 
 const App = () => {
     const initialState = {
@@ -43,6 +44,7 @@ const App = () => {
 
     const [side, flip] = useState(true);
     const [imageSrc, setImageSrc] = useState(placeholderImage);
+    const [QRSrc, setQRSrc] = useState(placeholderQR);
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const displayActiveSide = e => {
@@ -100,7 +102,11 @@ const App = () => {
                                     style={props}
                                     className={[style.card, style.centered].join(" ")}
                                 >
-                                    <CardRear state={state} spin={spin} />
+                                    <CardRear 
+                                        state={state} 
+                                        spin={spin}
+                                        QR={QRSrc || placeholderQR} 
+                                    />
                                 </animated.section>
                             )
                         )
@@ -123,7 +129,7 @@ const App = () => {
         <div className={style.toPrint}>
             <CardFront  state={state} spin={spin} image={imageSrc || image} />
             <br />
-            <CardRear  state={state} spin={spin} />
+            <CardRear  state={state} spin={spin} QR={QRSrc || placeholderQR}/>
         </div>
     </>
     );

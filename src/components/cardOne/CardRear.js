@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import style from './card-one.module.scss';
-import image from './imgs/qr_wiki_en.png';
 
 const splitOverMultipleLines = (string, limit) => {
     let i = 0;
@@ -17,7 +16,7 @@ const splitOverMultipleLines = (string, limit) => {
 
 const CardRear = props => {
     const {email, github, twitter} = props.state;
-    const {spin} = props;
+    const {spin, QR} = props;
     return (
         <div className={style.badge}>
              <button onClick={spin} className={style.btn}>toggle</button>
@@ -36,7 +35,7 @@ const CardRear = props => {
                     <span>{twitter || '@Doe44'}</span>
                 </div>
             </div>
-            <img src={image} alt="myImage" width="150" height="150"/>
+            <img src={QR} alt="QR Code" width="150" height="150"/>
         </div>
     );    
 };
