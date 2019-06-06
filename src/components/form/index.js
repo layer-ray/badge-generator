@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 
 import formStyle from './form.module.scss';
 import image from '../../../public/imgs/qr_wiki_en.png';
+import PropTypes from 'prop-types';
 
 const Form = props => {
     const {state, dispatch, focusHandler, generateQR} = props;
@@ -10,7 +11,7 @@ const Form = props => {
         e.preventDefault();
         dispatch({type:'reset'})
     };
-    
+
     return(
         <form className={formStyle.form}>
             <div className={formStyle.field}>
@@ -107,5 +108,18 @@ const Form = props => {
         </form>
     );
 };
+
+Form.propTypes = {
+    state: PropTypes.shape({
+        firstName: PropTypes.string,
+        lastName: PropTypes.string,
+        email: PropTypes.string,
+        github: PropTypes.string,
+        twitter: PropTypes.string,
+    }),
+    dispatch: PropTypes.func.isRequired,
+    focusHandler: PropTypes.func.isRequired,
+    generateQR: PropTypes.func.isRequired
+}
 
 export default Form;
