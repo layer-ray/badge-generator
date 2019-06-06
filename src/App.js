@@ -28,7 +28,9 @@ const App = () => {
             case 'github':
                 return {...state, github: action.payload};
             case 'twitter':
-                return {...state, twitter: action.payload};
+                return action.payload === ''
+                    ?  {...state, twitter: ''}
+                    :  {...state, twitter: '@' + action.payload};
             default:
                 throw Error('Unknown event occurred')
         }

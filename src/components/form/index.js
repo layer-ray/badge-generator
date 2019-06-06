@@ -67,7 +67,7 @@ const Form = props => {
                         id="twitter"
                         size="1"
                         onChange={e => dispatch({type: 'twitter',payload: e.target.value})}
-                        value={twitter}
+                        value={twitter.slice(1)}
                     />
                 </div>
             </div>
