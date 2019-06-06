@@ -36,17 +36,18 @@ const App = () => {
         }
     };
 
-    const [side, Flip] = useState(1);
+    const [imageSrc, setImageSrc] = useState(image);
     const [state, dispatch] = useReducer(reducer, initialState);
 
+    const loadImage = () => {
+        const imgSrc = prompt('insert url');
+        setImageSrc(imgSrc);
+    }
     return (
         <div className={style.container}>        
         {
-            side 
-                ? <div className={[style.card, style.centered].join(" ")}>
-                    <button 
-                        onClick={() => Flip(side ? 0 : 1)}
-                        className={style.button}
+                                        image={imageSrc || image}
+                                        load={loadImage}
                     >
                         See {side ? 'rear' : 'front'}
                     </button>
