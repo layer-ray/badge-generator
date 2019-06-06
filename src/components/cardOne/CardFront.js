@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
 
-import cardStyle from './card-one.module.scss';
-import image from './imgs/placeholder.jpg';
+import style from './card-one.module.scss';
+
 
 const CardFront = props => {
-    const {firstName, lastName, email} = props.state;
+    const {firstName, lastName} = props.state;
+    const {spin, image, load} = props;
     return (
          <div className={style.badge}>
              <button onClick={spin} className={style.btn}>toggle</button>
@@ -17,16 +19,29 @@ const CardFront = props => {
                      + 
                 </button>
              </figure>
-                <span>{firstName || 'Jhon'}</span>
-            </div>
-            <div className={cardStyle.field}>
-                <span>{lastName || 'Doe'}</span>
-            </div>
-            <div className={cardStyle.field}>
-                <span>{email || 'Jhon_DaDoe@cool.com'}</span>
+            
+            <div>
+                <div className={style.field}>
+                    <span>{firstName || 'Jhon'}</span>
+                </div>
+                <div className={style.field}>
+                    <span>{lastName || 'Doe'}</span>
+                </div>
             </div>
         </div>
-    );    
+    );
+};
+
+CardFront.propTypes = {
+    state: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+    }),
+    spin: PropTypes.func.isRequired,
+    image: PropTypes.string,
+    load: PropTypes.func
 };
 
 export default CardFront;
+
+// https://www.w3schools.com/howto/img_forest.jpg
