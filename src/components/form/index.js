@@ -1,17 +1,20 @@
 import React, {useState} from 'react';
 
-import formStyle from './form.module.scss';
-import image from '../../../public/imgs/qr_wiki_en.png';
+import style from './form.module.scss';
 import PropTypes from 'prop-types';
 
 const Form = props => {
-    const {state, dispatch, focusHandler, generateQR} = props;
+    const {state, dispatch, focusHandler, submitData, QR} = props;
     const {firstName, lastName, email, github, twitter} = state;
     const resetAll = e => {
         e.preventDefault();
         dispatch({type:'reset'})
     };
 
+    const submitHandler = e => {
+        e.preventDefault();
+        submitData();
+    };
     return(
         <>
         <div>
@@ -19,6 +22,9 @@ const Form = props => {
                 fields marked with asterisk(*) are required
             </span>
         </div>
+        <form className={style.form} onSubmit={submitHandler}>
+            <div className={style.field}>
+                <label htmlFor="first-name">First name*</label>
                 <input 
                     type="text" 
                     name="firstName" 
@@ -28,9 +34,9 @@ const Form = props => {
                     onChange={e => dispatch({type: 'first',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={firstName}
-                    required
                 />
             </div>
+            <div className={style.field}>
                 <label htmlFor="last-name">Last name*</label>
                 <input 
                     type="text"
@@ -41,9 +47,9 @@ const Form = props => {
                     onChange={e => dispatch({type: 'last',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={lastName}
-                    required
                 />
             </div>
+            <div className={style.field}>
                 <label htmlFor="email">Email*</label>
                 <input 
                     type="text" 
@@ -54,10 +60,9 @@ const Form = props => {
                     onChange={e => dispatch({type: 'email',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={email}
-                    required
                 />
             </div>
-            <div className={formStyle.field}>
+            <div className={style.field}>
                 <label htmlFor="github">Github account</label>
                 <input 
                     type="text" 
@@ -70,9 +75,9 @@ const Form = props => {
                     value={github}
                 />
             </div>
-            <div className={formStyle.field}>
+            <div className={style.field}>
                 <label htmlFor="twitter">Twitter account</label>
-                <div className={formStyle.combinedField}>
+                <div className={style.combinedField}>
                     <span>@</span>
                     <input 
                         type="text" 
@@ -86,24 +91,23 @@ const Form = props => {
                     />
                 </div>
             </div>
-            <div className={formStyle.field}>
-                <div className={formStyle.buttons}>
+            <div className={style.field}>
+                <div className={style.buttons}>
                     <input 
-                        className={[formStyle.btn, formStyle.success].join(" ")} 
+                        className={[style.btn, style.success].join(" ")} 
                         type="submit" 
                         value="create"
-                        onClick={generateQR}
                     />
                     <button 
-                        className={[formStyle.btn, formStyle.error].join(" ")}
+                        className={[style.btn, style.error].join(" ")}
                         onClick={resetAll}
                     >
                         cancel
                     </button>
                 </div>
-                <div className={formStyle.image}>
+                <div className={style.image}>
                     <label htmlFor="email">QR Code</label>
-                    <img src={image} alt="placeholder" width="100px" height="100px" />
+                    <img src={QR} alt="placeholder" width="100px" height="100px" />
                 </div>
             </div>
         </form>
@@ -121,7 +125,7 @@ Form.propTypes = {
     }),
     dispatch: PropTypes.func.isRequired,
     focusHandler: PropTypes.func.isRequired,
-    generateQR: PropTypes.func.isRequired
+    submitData: PropTypes.func.isRequired
 }
 
 export default Form;

@@ -12,6 +12,9 @@ import style from './app.module.scss';
 import placeholderImage from '../public/imgs/placeholder.jpg';
 import placeholderQR from '../public/imgs/qr_wiki_en.png';
 
+// from emailregex.com
+const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
 const App = () => {
     const initialState = {
         firstName: '',
@@ -36,7 +39,10 @@ const App = () => {
                     ?  {...state, twitter: ''}
                     :  {...state, twitter: '@' + action.payload};
             case 'reset':
+                // side effects?
                 setImageSrc(placeholderImage);
+                setQRSrc(placeholderQR);
+                setIsValid(false);
                 return initialState;
             default:
                 throw Error('Unknown event occurred')
@@ -44,8 +50,9 @@ const App = () => {
     };
 
     const [side, flip] = useState(true);
-    const [imageSrc, setImageSrc] = useState(placeholderImage);
+    const [isValid, setIsValid] = useState(false);
     const [QRSrc, setQRSrc] = useState(placeholderQR);
+    const [imageSrc, setImageSrc] = useState(placeholderImage);
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const displayActiveSide = e => {
@@ -74,8 +81,18 @@ const App = () => {
         };
     }
 
-    const generateQR = e => {
-        e.preventDefault();
+    const validateFields = () => {
+        if(state.firstName === "" || state.lastName === "" || state.email === ""){
+            throw new Error('All fields marked with asterisk(*) are required!');
+        };
+
+        if(!emailRegex.test(state.email)){
+            throw new Error('Please insert a valid email');    
+        };
+        setIsValid(true);
+    }
+
+    const generateQR = () => {
         const data = JSON.stringify(state);
         QRCode.toDataURL(data)
                 .then(QR => {
@@ -85,6 +102,11 @@ const App = () => {
                     console.error(error);
                 });
     }
+
+    const submitData = () => {
+        validateFields();
+        generateQR();
+    };
 
     const transitions = useTransition(side, null, {
         initial: { position: 'absolute', opacity: 0, transform: 'rotateY(0deg)' },
@@ -131,6 +153,7 @@ const App = () => {
             <button 
                 onClick={printDoc} 
                 className={[style.btn, style.centered].join(" ")}
+                disabled={!isValid}
             >
                 Print Your Badge!
             </button>
@@ -139,7 +162,8 @@ const App = () => {
                     state={state} 
                     dispatch={dispatch} 
                     focusHandler={displayActiveSide}
-                    generateQR={generateQR}
+                    submitData={submitData}
+                    QR={QRSrc || placeholderQR} 
                 />
             </div>
         </div>
