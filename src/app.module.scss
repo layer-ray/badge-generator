@@ -31,6 +31,15 @@
     color: #eee;
     font-size: 500;
 }
+.btn:disabled {
+    background-color: #aaa;
+    color: #555;
+    cursor: not-allowed;
+}
+
+.notificationWrapper {
+    position: absolute;
+}
 
 .toPrint {
     display: none;

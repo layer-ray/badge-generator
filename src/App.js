@@ -1,8 +1,9 @@
 import React, {useState, useReducer} from 'react';
 
 import QRCode from 'qrcode';
-import {useTransition, animated, config} from 'react-spring';
+import {useSpring, useTransition, animated, config} from 'react-spring';
 
+import Notification from './components/notification';
 import CardFront from './components/cardOne/CardFront';
 import CardRear from './components/cardOne/CardRear';
 import Form from './components/form';
@@ -50,7 +51,15 @@ const App = () => {
     };
 
     const [side, flip] = useState(true);
+    // form data
     const [isValid, setIsValid] = useState(false);
+    // notification (default just as reference)
+    const [status, setStatus] = useState({
+        message: '',
+        type: '',
+        timer: 0,
+        active: false
+    });
     const [QRSrc, setQRSrc] = useState(placeholderQR);
     const [imageSrc, setImageSrc] = useState(placeholderImage);
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -82,14 +91,22 @@ const App = () => {
     }
 
     const validateFields = () => {
+
         if(state.firstName === "" || state.lastName === "" || state.email === ""){
+            displayNotification('All fields marked with asterisk(*) are required!', 'error', 2000);
             throw new Error('All fields marked with asterisk(*) are required!');
         };
 
         if(!emailRegex.test(state.email)){
+            displayNotification('Please insert a valid email!', 'error', 2000);
             throw new Error('Please insert a valid email');    
         };
         setIsValid(true);
+        setStatus({
+            message: '',
+            type: '',
+            active: false
+        });
     }
 
     const generateQR = () => {
@@ -97,15 +114,36 @@ const App = () => {
         QRCode.toDataURL(data)
                 .then(QR => {
                     setQRSrc(QR);
+                    displayNotification('Badge generated!', 'success', 2000);
                 })
                 .catch( error => {
-                    console.error(error);
+                    displayNotification( error, 'error', 2000);
+                    throw new Error(error);
                 });
     }
 
     const submitData = () => {
         validateFields();
         generateQR();
+    };
+
+    const displayNotification = (message, type, ms) => {
+        // in xx ms status will be set inactive
+        let timer = setTimeout(() => {
+            setStatus(prevStatus => ({...prevStatus, active: false}))
+            }, ms);
+        
+        // if notification is already active it will be restarted
+        if(status.active) {
+            // the timer already set has to be removed otherwise
+            // it would have an effect on the new animation
+            clearTimeout(status.timer);
+            setStatus(prevStatus => ({...prevStatus, message: '', active: false}));
+
+            setTimeout(() => setStatus({message, type, timer, active: true}), 150);
+        } else {
+           setStatus({message, type, timer, active: true});
+        }
     };
 
     const transitions = useTransition(side, null, {
@@ -118,8 +156,17 @@ const App = () => {
         config: config.molasses
     });
 
+    const notificationProps = useSpring({ 
+        to: {top: status.active ? '100px': '-200px'}
+        })
     return (
         <>
+            <animated.div className={[style.notificationWrapper, style.centered].join(" ")} style={notificationProps}>
+                <Notification 
+                    message={status.message} 
+                    type={status.type}
+                />
+            </animated.div>
             <div className={style.container}>
                 {
                     transitions.map(({ item, key, props }) =>  (
@@ -167,19 +214,18 @@ const App = () => {
                 />
             </div>
         </div>
-        <div className={style.toPrint}>
+        <div className={[style.card, style.centered, style.toPrint].join(" ")}>
             <CardFront  
                 state={state} 
                 spin={spin} 
                 image={imageSrc || image} 
-                className={[style.card, style.centered].join(" ")}
+                
             />
             <br />
             <CardRear  
                 state={state} 
                 spin={spin} 
                 QR={QRSrc || placeholderQR}
-                className={[style.card, style.centered].join(" ")}
             />
         </div>
     </>
