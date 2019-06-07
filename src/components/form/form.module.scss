@@ -4,6 +4,9 @@
     justify-content: stretch;
     background-color: #eee;
     padding: 1rem;
+
+    max-height: 40vh;
+    overflow: auto;
 }
 
 .field {
@@ -23,16 +26,17 @@
     flex-grow: 1;
     border: 1px solid #aaa;
     & > *:first-child {
-        height: 80%;
+        height: 70%;
     }
     & > *:nth-child(2) {
-        height: 20%;
+        height: 30%;
     }
 }
 
 .btn {
     width: 100%;
     background: none;
+    padding: 1rem;
     border: 0;
 }
 
