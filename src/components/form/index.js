@@ -13,9 +13,12 @@ const Form = props => {
     };
 
     return(
-        <form className={formStyle.form}>
-            <div className={formStyle.field}>
-                <label htmlFor="first-name">First name</label>
+        <>
+        <div>
+            <span className={style.caption}>
+                fields marked with asterisk(*) are required
+            </span>
+        </div>
                 <input 
                     type="text" 
                     name="firstName" 
@@ -28,8 +31,7 @@ const Form = props => {
                     required
                 />
             </div>
-            <div className={formStyle.field}>
-                <label htmlFor="last-name">Last name</label>
+                <label htmlFor="last-name">Last name*</label>
                 <input 
                     type="text"
                     name="lastName"
@@ -42,8 +44,7 @@ const Form = props => {
                     required
                 />
             </div>
-            <div className={formStyle.field}>
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">Email*</label>
                 <input 
                     type="text" 
                     name="email"
@@ -106,6 +107,7 @@ const Form = props => {
                 </div>
             </div>
         </form>
+        </>
     );
 };
 
