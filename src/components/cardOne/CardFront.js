@@ -11,7 +11,7 @@ const CardFront = props => {
          <div className={style.badge}>
              <button onClick={spin} className={style.btn}>toggle</button>
              <figure className={style.figure}>
-                <img src={image} alt="myPhoto" width="150" height="150"/> 
+                <img src={image} alt="myPhoto" height="150"/> 
                 <button 
                     className={style.overlayBtn}
                     onClick={load}
