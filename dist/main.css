@@ -1,9 +1,2 @@
-*, *::before, *::after {
-  border: 0;
-  padding: 0;
-  margin: 0; }
-
-body {
-  font: 500 1rem Arial, sans-serif;
-  background-image: radial-gradient(#eee, #ddf); }
+*,*::before,*::after{border:0;padding:0;margin:0}body{font:500 1rem Arial, sans-serif;background-image:radial-gradient(#eee, #ddf)}
 
