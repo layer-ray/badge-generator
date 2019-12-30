@@ -96,7 +96,7 @@ const Form = props => {
                     <input 
                         className={[style.btn, style.success].join(" ")} 
                         type="submit" 
-                        value="create"
+                        value="generate QR code*"
                     />
                     <button 
                         className={[style.btn, style.error].join(" ")}
