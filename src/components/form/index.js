@@ -4,10 +4,11 @@ import style from './form.module.scss';
 import PropTypes from 'prop-types';
 
 const Form = props => {
-    const {state, dispatch, focusHandler, submitData, QR} = props;
+    const {state, dispatch, focusHandler, submitData, QR, removeFreeze, isFrozen} = props;
     const {firstName, lastName, email, github, twitter} = state;
     const resetAll = e => {
         e.preventDefault();
+        removeFreeze(true);
         dispatch({type:'reset'})
     };
 
@@ -34,6 +35,7 @@ const Form = props => {
                     onChange={e => dispatch({type: 'first',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={firstName}
+                    disabled={isFrozen}
                 />
             </div>
             <div className={style.field}>
@@ -47,6 +49,7 @@ const Form = props => {
                     onChange={e => dispatch({type: 'last',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={lastName}
+                    disabled={isFrozen}
                 />
             </div>
             <div className={style.field}>
@@ -60,6 +63,7 @@ const Form = props => {
                     onChange={e => dispatch({type: 'email',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={email}
+                    disabled={isFrozen}
                 />
             </div>
             <div className={style.field}>
@@ -73,6 +77,7 @@ const Form = props => {
                     onChange={e => dispatch({type: 'github',payload: e.target.value})}
                     onFocus={focusHandler}
                     value={github}
+                    disabled={isFrozen}
                 />
             </div>
             <div className={style.field}>
@@ -88,6 +93,7 @@ const Form = props => {
                         onChange={e => dispatch({type: 'twitter',payload: e.target.value})}
                         onFocus={focusHandler}
                         value={twitter.slice(1)}
+                        disabled={isFrozen}
                     />
                 </div>
             </div>

@@ -50,6 +50,7 @@ const App = () => {
         }
     };
 
+    const [freeze, setFreeze] = useState(false);
     const [side, flip] = useState(true);
     // form data
     const [isValid, setIsValid] = useState(false);
@@ -75,6 +76,8 @@ const App = () => {
 
     const printDoc = () => {
         window.print();
+        setFreeze(false);
+        dispatch({type: 'reset'})
     };
 
     const loadImage = () => {
@@ -91,7 +94,7 @@ const App = () => {
     }
 
     const validateFields = () => {
-
+        setIsValid(false)
         if(state.firstName === "" || state.lastName === "" || state.email === ""){
             displayNotification('All fields marked with asterisk(*) are required!', 'error', 2000);
             throw new Error('All fields marked with asterisk(*) are required!');
@@ -125,6 +128,7 @@ const App = () => {
     const submitData = () => {
         validateFields();
         generateQR();
+        setFreeze(true);
     };
 
     const displayNotification = (message, type, ms) => {
@@ -207,7 +211,9 @@ const App = () => {
             <div className={[style.panel, style.centered].join(" ")}>
                 <Form 
                     state={state} 
-                    dispatch={dispatch} 
+                    dispatch={dispatch}
+                    isFrozen={freeze} 
+                    removeFreeze={() => setFreeze(false)}
                     focusHandler={displayActiveSide}
                     submitData={submitData}
                     QR={QRSrc || placeholderQR} 
