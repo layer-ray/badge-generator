@@ -1,3 +1,5 @@
+@import "../../shared.scss";
+
 .notification {
     position: absolute;
     margin: auto;
@@ -10,13 +12,13 @@
 }
 
 .error {
-    border: 1px solid #411;
-    background-color: #e88;
-    color: #411;
+    border: 1px solid $danger;
+    background-color: lighten($danger, 45%);
+    color: $danger;
 }
 
 .success {
-    border: 1px solid #141;
-    background-color: #8e8;
-    color: #141;
+    border: 1px solid $success;
+    background-color: lighten($success, 45%);
+    color: $success;
 }

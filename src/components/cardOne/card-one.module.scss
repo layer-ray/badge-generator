@@ -1,7 +1,9 @@
+@import "../../shared.scss";
+
 .badge {
-    background-color:#eee;
+    background-color: $dirty-white;
     padding: 1rem 0;
-    border: 3px solid #999;
+    border: 3px solid $light-grey;
     margin: auto;
     
     height: 150px;
@@ -15,8 +17,8 @@
     position: absolute;
     top: 5px;
     right: 5px;
-    background-color: #44a;
-    color: #eee;
+    background-color: $secondary;
+    color: $dirty-white;
     padding: 0.25rem 0.5rem;
     cursor: pointer;
 }
@@ -27,8 +29,8 @@
     height: 100%;
     font-weight: 600;
     font-size: 5rem;
-    color: #eee;
-    background-color: #aaa;
+    color: $dirty-white;
+    background-color: $light-grey;
     opacity: 0;
     top: 0;
     cursor: pointer;

@@ -1,3 +1,5 @@
+@import "shared.scss";
+
 .container {
     height: 98vh;
 }
@@ -26,13 +28,13 @@
     top: 40vh;
     width: 50%;
     padding: 1rem;
-    background-color: #180;
+    background-color: $success;
     border-radius: 20px;
-    color: #eee;
+    color: $dirty-white;
 }
 .btn:disabled {
-    background-color: #aaa;
-    color: #555;
+    background-color: $light-grey;
+    color: darken($light-grey, 30%);
     cursor: not-allowed;
 }
 

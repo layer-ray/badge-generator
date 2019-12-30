@@ -1,8 +1,10 @@
+@import "../../shared.scss";
+
 .form {
     display: flex;
     flex-flow: row wrap;
     justify-content: stretch;
-    background-color: #eee;
+    background-color: $dirty-white;
     padding: 1rem;
 
     max-height: 40vh;
@@ -12,7 +14,7 @@
 .field {
     padding: 1rem;
     flex-grow: 1;
-    border: 1px solid #aaa;
+    border: 1px solid $light-grey;
     position: relative;
 }
 
@@ -24,7 +26,7 @@
 }
 .field .buttons {
     flex-grow: 1;
-    border: 1px solid #aaa;
+    border: 1px solid $light-grey;
     & > *:first-child {
         height: 70%;
     }
@@ -41,20 +43,20 @@
 }
 
 .error {
-    border: 1px solid #411;
-    background-color: #e88;
-    color: #411;
+    border: 1px solid $danger;
+    background-color: lighten($danger, 40%);
+    color: $danger;
 }
 
 .success {
-    border: 1px solid #141;
-    background-color: #8e8;
-    color: #141;
+    border: 1px solid $success;
+    background-color: lighten($success, 45%);
+    color: $success;
 }
 
 .field .image {
     flex-grow: 1;
-    border: 1px solid #aaa;
+    border: 1px solid $light-grey;
     padding: 1rem;
 }
 
@@ -79,7 +81,7 @@ label {
 
 input[type=text]{
     border: 0;
-    background-color: #eee;
+    background-color: $dirty-white;
     border-bottom: 2px groove #1d1a1a;
     min-width: 100px;
     width: 100%;
